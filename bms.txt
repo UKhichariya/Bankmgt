@@ -1,20 +1,20 @@
 ﻿BANK MANAGEMENT SYSTEM
 Menu:
 1. Create account
-1.1. Enter name, phone, address, email, etc.
-1.2. Deposit money
-1.3. Assign acc. No.
+    1.1. Enter name, phone, address, email, etc.
+    1.2. Deposit money
+    1.3. Assign acc. No.
 2. Login- (acc no. / pass)
-2.1. View account details
-2.1.1. Show user details
-2.1.2. Show money in acc.
-2.2. Withdraw money
-2.3. Deposit money
-2.4. Transfer to another account
-2.4.1. Other acc. No. / amount 
-2.4.2. Remarks
-2.5. Request money
-2.5.1. Acc. No / amount
-2.5.2.  Remarks
+    2.1. View account details
+    2.1.1. Show user details
+    2.1.2. Show money in acc.
+    2.2. Withdraw money
+    2.3. Deposit money
+    2.4. Transfer to another account
+    2.4.1. Other acc. No. / amount 
+    2.4.2. Remarks
+    2.5. Request money
+    2.5.1. Acc. No / amount
+    2.5.2.  Remarks
 
 
