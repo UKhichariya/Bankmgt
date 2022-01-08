@@ -3,6 +3,18 @@ Bank Management System
 
 This Program is for managing Bank Works
 
+
+Usage: 
+    Enter your mysql username and password to file 
+    config.py and add filename "config.py" to
+    .gitignore to avoid pushing it to remote repo.
+
+    ##content should be ##
+        mysql_user=<username>
+        mysql_passwd=<password>
+
+
+
 8/1/22 - 1:20 PM
 
 Update:
