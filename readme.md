@@ -13,7 +13,10 @@ Usage:
         mysql_user=<username>
         mysql_passwd=<password>
 
-
+Python Dependency: 
+````
+pwinput
+````
 
 8/1/22 - 1:20 PM
 

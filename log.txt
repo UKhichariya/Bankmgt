@@ -12,3 +12,4 @@ Log from ashish 2:00 jan 8
 log from ashish 4:30 jan 8
     changes the way user sees the intered password, from blank to Stars ***
             used pwinput lib
+            requires pwinput library to be installed
