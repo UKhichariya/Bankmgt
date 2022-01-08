@@ -1,5 +1,5 @@
 import random
-import pwinput as pp
+import pwinput as pp #install pwinput lib using "pip3 install pwinput" statement 
 import mainmenu as m1
 import mysql.connector as sqltor
 import tables
@@ -11,14 +11,16 @@ mycon = sqltor.connect(
     passwd = config.mysql_passwd,
     database = 'bank'
 )
+#Checking if connecter or not
 if mycon.is_connected() == False:
    print('Could not connect to database...')
-   
+
+#Creating a sql cursor   
 cur = mycon.cursor()
 
 #tables.tables()
 
-
+#Extracting all account numbers from the database into a list
 cur.execute("select AccNo from data")
 acc_data = cur.fetchall()
 allacc_no = []
@@ -27,7 +29,7 @@ for a in acc_data:
 print(allacc_no)
 m1.menu()
 
-
+#If user chooses to create a new account
 if m1.num == 1:
     m1.ldash()
     print("| Create New Account |")
@@ -37,7 +39,7 @@ if m1.num == 1:
     age = str(input("Enter Age: "))
     address = str(input("Enter Address: "))
     accno = random.randint(100,999)
-    while accno in allacc_no:
+    while accno in allacc_no: #Ensuring the accno remains unique
         accno = random.randint(100,999)
     if accno not in allacc_no:
         cur.execute("insert into data values({},'{}',{},{},'{}')".format(accno,name,phone,age,address))
@@ -52,8 +54,7 @@ if m1.num == 1:
             password2 = str(pp.pwinput(prompt="Re-enter New Password: ", mask="*"))
     print("Account Created Successfully!")
     print("Your Account Number:",accno)
-    print("Your Password:",password1)  #Note From ashish :Security flaw should not display these
-    print("Remember these details!")
+    #print("Your Password:",password1)  #Note From ashish :Security flaw should not display these
+    print("Remember this detail!")
     cur.execute("insert into pass values({},'{}')".format(accno,password1))
     mycon.commit()
-    
