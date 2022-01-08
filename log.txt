@@ -1,0 +1,11 @@
+Log from ashish 2:00 jan 8
+    added config.py to put username and password of mysql:
+        ##content of config.py
+            mysql_user="<username>"
+            mysql_passwd="<Password>"
+    added a safer way to input the password without showing the password
+        using getpass lib
+            ## example
+                password1 = str(gp.getpass(prompt="Create new password: "))
+                password2 = str(gp.getpass(prompt="Re-enter New Password:"))
+
