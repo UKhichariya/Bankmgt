@@ -1,5 +1,5 @@
 import random
-import getpass as gp
+import pwinput as pp
 import mainmenu as m1
 import mysql.connector as sqltor
 import tables
@@ -43,13 +43,13 @@ if m1.num == 1:
         cur.execute("insert into data values({},'{}',{},{},'{}')".format(accno,name,phone,age,address))
     mycon.commit()
 
-    password1 = str(gp.getpass(prompt="Create new password: "))
-    password2 = str(gp.getpass(prompt="Re-enter New Password:"))
+    password1 = str(pp.pwinput(prompt="Create new password: ", mask="*"))
+    password2 = str(pp.pwinput(prompt="Re-enter New Password:", mask="*"))
     if password1 != password2:
         while password1 != password2:
             print("Passwords do not match!")
-            password1 = str(gp.getpass(prompt="Create new password: "))
-            password2 = str(gp.getpass(prompt="Re-enter New Password:"))
+            password1 = str(pp.pwinput(prompt="Create new password: ", mask="*"))
+            password2 = str(pp.pwinput(prompt="Re-enter New Password: ", mask="*"))
     print("Account Created Successfully!")
     print("Your Account Number:",accno)
     print("Your Password:",password1)  #Note From ashish :Security flaw should not display these

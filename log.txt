@@ -9,3 +9,6 @@ Log from ashish 2:00 jan 8
                 password1 = str(gp.getpass(prompt="Create new password: "))
                 password2 = str(gp.getpass(prompt="Re-enter New Password:"))
 
+log from ashish 4:30 jan 8
+    changes the way user sees the intered password, from blank to Stars ***
+            used pwinput lib
