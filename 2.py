@@ -1,40 +1,30 @@
 import random
 import mainmenu as m1
 import mysql.connector as sqltor
+import tables
 
 #establishing the connection
 mycon = sqltor.connect(
-   host = 'localhost',
-   user = 'root',
-   passwd = 'zzzzzz',
-   database = 'bank'
+    host = 'localhost',
+    user = 'root',
+    passwd = 'zzzzzz',
+    database = 'bank'
 )
 if mycon.is_connected() == False:
    print('Could not connect to database...')
-
+   
 cur = mycon.cursor()
 
-table_data = ('''create table data(
-            AccNo int,
-            Name char(30),
-            Phone int(20),
-            Age int(3),
-            Address char(70),
-            PRIMARY KEY (AccNo))
-        ''')
-table_pass = ('''create table pass(
-            SNo int,
-            AccNo int,
-            Password varchar(30),
-            FOREIGN KEY (AccNo) REFERENCES data(AccNo))
-        ''')
-#cur.execute(table_data)
-#cur.execute(table_pass)
+#tables.tables()
 
-m1.menu()
 cur.execute("select AccNo from data")
-dx = cur.fetchall()
-print(dx)
+acc_data = cur.fetchall()
+allacc_no = []
+for a in acc_data:
+   allacc_no.append(a[0])
+print(allacc_no)
+m1.menu()
+
 
 if m1.num == 1:
     m1.ldash()
@@ -45,6 +35,23 @@ if m1.num == 1:
     age = str(input("Enter Age: "))
     address = str(input("Enter Address: "))
     accno = random.randint(100,999)
-    cur.execute("insert into data values({},'{}',{},{},'{}')".format(accno,name,phone,age,address))
+    while accno in allacc_no:
+        accno = random.randint(100,999)
+    if accno not in allacc_no:
+        cur.execute("insert into data values({},'{}',{},{},'{}')".format(accno,name,phone,age,address))
     mycon.commit()
-    print("Account Created Successfully!")  
+
+    password1 = str(input("Create new password: "))
+    password2 = str(input("Re-enter new password: "))
+    if password1 != password2:
+        while password1 != password2:
+            print("Passwords do not match!")
+            password1 = str(input("Create new password: "))
+            password2 = str(input("Re-enter new password: "))
+    print("Account Created Successfully!")
+    print("Your Account Number:",accno)
+    print("Your Password:",password1)
+    print("Remember these details!")
+    cur.execute("insert into pass values({},'{}')".format(accno,password1))
+    mycon.commit()
+    
