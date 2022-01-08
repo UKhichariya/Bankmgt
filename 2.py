@@ -1,13 +1,14 @@
 import random
+import getpass as gp
 import mainmenu as m1
 import mysql.connector as sqltor
 import tables
-
+import config
 #establishing the connection
 mycon = sqltor.connect(
     host = 'localhost',
-    user = 'root',
-    passwd = 'zzzzzz',
+    user = config.mysql_user,
+    passwd = config.mysql_passwd,
     database = 'bank'
 )
 if mycon.is_connected() == False:
@@ -16,6 +17,7 @@ if mycon.is_connected() == False:
 cur = mycon.cursor()
 
 #tables.tables()
+
 
 cur.execute("select AccNo from data")
 acc_data = cur.fetchall()
@@ -41,16 +43,16 @@ if m1.num == 1:
         cur.execute("insert into data values({},'{}',{},{},'{}')".format(accno,name,phone,age,address))
     mycon.commit()
 
-    password1 = str(input("Create new password: "))
-    password2 = str(input("Re-enter new password: "))
+    password1 = str(gp.getpass(prompt="Create new password: "))
+    password2 = str(gp.getpass(prompt="Re-enter New Password:"))
     if password1 != password2:
         while password1 != password2:
             print("Passwords do not match!")
-            password1 = str(input("Create new password: "))
-            password2 = str(input("Re-enter new password: "))
+            password1 = str(gp.getpass(prompt="Create new password: "))
+            password2 = str(gp.getpass(prompt="Re-enter New Password:"))
     print("Account Created Successfully!")
     print("Your Account Number:",accno)
-    print("Your Password:",password1)
+    print("Your Password:",password1)  #Note From ashish :Security flaw should not display these
     print("Remember these details!")
     cur.execute("insert into pass values({},'{}')".format(accno,password1))
     mycon.commit()

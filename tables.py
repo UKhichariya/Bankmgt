@@ -1,9 +1,10 @@
 import mysql.connector as sqltor
+import config
 #establishing the connection
 mycon = sqltor.connect(
     host = 'localhost',
-    user = 'root',
-    passwd = 'zzzzzz',
+    user = config.mysql_user,
+    passwd = config.mysql_passwd,
     database = 'bank'
 )
 if mycon.is_connected() == False:
