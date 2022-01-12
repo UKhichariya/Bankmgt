@@ -52,17 +52,18 @@ Input/Output Requirements
         Whether the transfer is successful or not.
 
 System Requirements
+    Minimum Requirements 
 
     Hardware Requirements 
 
     Processor: Intel Core i3 or AMD Ryzen 3 Processors 
-    Ram: Minimum 4 GB DDR4     Memory
+    Ram: Minimum 4 GB DDR3  Memory
     Storage :256GB
 
     Software Requirements
 
     Python version: 3.5 or later
-    MySQL: 5.7 or later
+    MySQL: 5.7 or later 
     Python-MySQL-Connector: 2.0 or later
 
 System Design
