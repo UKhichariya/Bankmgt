@@ -4,6 +4,7 @@ import mainmenu as m1
 import mysql.connector as sqltor
 import tables
 import config
+
 #establishing the connection
 mycon = sqltor.connect(
     host = 'localhost',
@@ -18,7 +19,6 @@ if mycon.is_connected() == False:
 #Creating a sql cursor   
 cur = mycon.cursor()
 
-#tables.tables()
 
 #Extracting all account numbers from the database into a list
 cur.execute("select AccNo from data")
@@ -26,11 +26,11 @@ acc_data = cur.fetchall()
 allacc_no = []
 for a in acc_data:
    allacc_no.append(a[0])
-print(allacc_no)
-m1.menu()
+#print(allacc_no)
+#m1.menu()
 
-#If user chooses to create a new account
-if m1.num == 1:
+
+def acc_create():
     m1.ldash()
     print("| Create New Account |")
     m1.ldash()

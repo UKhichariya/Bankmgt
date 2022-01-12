@@ -19,6 +19,7 @@ def tables():
                 Phone bigint(20),
                 Age int(3),
                 Address char(70),
+                balance float(20),
                 PRIMARY KEY (AccNo))
             ''')
     cur.execute(table_data)
@@ -28,5 +29,6 @@ def tables():
                 Password varchar(30),
                 FOREIGN KEY (AccNo) REFERENCES data(AccNo))
             ''')
-
     cur.execute(table_pass)
+
+
