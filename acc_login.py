@@ -1,6 +1,5 @@
 import random
-import pwinput as pp
-#install pwinput lib using "pip3 install pwinput" statement 
+import pwinput as pp#install pwinput lib using "pip3 install pwinput" statement 
 import mainmenu as m1
 import mysql.connector as sqltor
 import config

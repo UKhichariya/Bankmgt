@@ -24,6 +24,10 @@ if mycon.is_connected() == False:
 cur = mycon.cursor()
 
 
+#Run the command below if you do not have any sample data in your table to run the program on
+#tables.sample_data()
+
+
 
 ch = ''
 
@@ -76,27 +80,53 @@ while ch.lower() != 'exit':
                     if ch.lower() == "x":
                         break
                     pass_input = str(pp.pwinput(prompt="Enter password: ", mask="*"))
-                    m1.ldash()
                     cur.execute("select Password from pass where AccNo = {}".format(accno))
                     pass_true = cur.fetchone()
                     cur.execute("select * from data where AccNo = {}".format(accno))
                     alldata = cur.fetchall()    
                     if pass_input == pass_true[0]:
                         while ch.lower() != 'x' or ch.lower() != 'z':
+                            fields = ['Account Number','Name','Phone','Age','Address','Balance']
+                            m1.leq()
                             print("Welcome",alldata[0][1],"!")
-                            print("Press (1) to View Account Details")
-                            print("Press (2) to ")
+                            m1.leq()
+                            print("Press (1) to View User Details")
+                            print("Press (2) to Deposit money")
                             print("Press (3) to Withdraw money")
-                            print("Press (4) to Deposit money")
-                            print("Press (5) to")
+                            print("Press (4) to")
                             print('PRESS (x) to return to main menu')
+                            m1.ldash()
                             ch = input("Enter 1/2/3/4/5/X: ")
+                            m1.ldash()
                             if ch == '1':
-                                print('Acc. No. Name Phone Age Address Balance(INR)')
-                                for a in alldata[0]:
-                                    print(a,end = '\t')
+                                for a in range(6):
+                                    print(fields[a],':',alldata[0][a])
+                                    m1.ldash()
+                            if ch == '2':
+                                dep = float(input("Enter amount to deposit: "))
+                                cur.execute("update data set balance = balance+{} where accno = {};".format(dep,accno))
+                                mycon.commit()
+                                print('.\n..\n...\n')
+                                print('Rs',dep,'added to your account successfully!')
+                                cur.execute("select * from data where AccNo = {}".format(accno))
+                                alldata = cur.fetchall()    
+                                #Updating the deposit for the temp python list 'alldata'
+                            if ch == '3':
+                                wit = dep = float(input("Enter amount to withdraw: "))
+                                if wit < alldata[0][5]:
+                                    cur.execute("update data set balance = balance-{} where accno = {};".format(wit,accno))
+                                    mycon.commit()
+                                    print('Rs',wit,'withdrawn from your account! ')
+                                    print('.\n..\n...\nPlease collect the cash')
+                                    cur.execute("select * from data where AccNo = {}".format(accno))
+                                    alldata = cur.fetchall()    
+                                #Updating the deposit for the temp python list 'alldata'
+                                else:
+                                    print('Your account has a balance of',alldata[0][5])
+                                    print('You can\'nt withdraw more than what you have!')
                             if ch.lower() == 'x':
                                 break
+                        
                     else:
                         print("Wrong password!")
                         print('PRESS x to return to main menu')
@@ -121,7 +151,9 @@ while ch.lower() != 'exit':
                     ch = ''
         ch = ''    
     if m1.num.lower() == 'exit':
+        m1.leq()
         print("Thank you for using the program!")
+        m1.leq()
         break
     else:
         print("Please enter correct option!")
