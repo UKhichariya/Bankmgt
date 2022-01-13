@@ -46,6 +46,7 @@ def tables():
         cur.execute(table_pass)
 
 def sample_data():
+    cur.execute("USE bank")
     table_sample1 = ("INSERT INTO data VALUES({},'{}',{},{},'{}',{})".format(111,'Utkarsh Khichariya',23456789,17,'A-169, BC Nagar, New Delhi',10000))
     cur.execute(table_sample1)        
     table_sample2 = ('insert into data values({},"{}",{},{},"{}",{})'.format(543,'Sonal Jaiswal',873483874,19,'B2-312,Dream Board Colony, Kolkata',15000))
@@ -70,4 +71,4 @@ def sample_data():
 
     mycon.commit()
 
-tables()
+sample_data()
