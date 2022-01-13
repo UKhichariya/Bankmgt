@@ -71,4 +71,4 @@ def sample_data():
 
     mycon.commit()
 
-sample_data()
+
