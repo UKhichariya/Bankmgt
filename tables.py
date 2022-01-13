@@ -5,31 +5,45 @@ mycon = sqltor.connect(
     host = 'localhost',
     user = config.mysql_user,
     passwd = config.mysql_passwd,
-    database = 'bank'
+    
 )
 if mycon.is_connected() == False:
    print('Could not connect to database...')
 
 cur = mycon.cursor()
 
-def tables():
-    table_data = ('''create table data(
-                AccNo int,
-                Name char(30),
-                Phone bigint(20),
-                Age int(3),
-                Address char(70),
-                balance float(20),
-                PRIMARY KEY (AccNo))
-            ''')
-    cur.execute(table_data)
+def tables(): 
+    cur.execute("SHOW DATABASES")
+    if ("bank",) in cur:
+#        print("Database exist")
+        cur.reset()
+        cur.execute("USE bank")
+        mycon.commit()
+        
+    else:
+        print("First Time configuration, Database doesnt exist")
+        cur.execute("CREATE DATABASE {}".format("bank"))
+        cur.execute("USE bank")
+        print("DATABASE CREATED")
+        
 
-    table_pass = ('''create table pass(
-                AccNo int,
-                Password varchar(30),
-                FOREIGN KEY (AccNo) REFERENCES data(AccNo))
-            ''')
-    cur.execute(table_pass)
+        table_data = ('''create table data(
+                    AccNo int,
+                    Name char(30),
+                    Phone bigint(20),
+                    Age int(3),
+                    Address char(70),
+                    balance float(20),
+                    PRIMARY KEY (AccNo))
+                ''')
+        cur.execute(table_data)
+
+        table_pass = ('''create table pass(
+                    AccNo int,
+                    Password varchar(30),
+                    FOREIGN KEY (AccNo) REFERENCES data(AccNo))
+                ''')
+        cur.execute(table_pass)
 
 def sample_data():
     table_sample1 = ("INSERT INTO data VALUES({},'{}',{},{},'{}',{})".format(111,'Utkarsh Khichariya',23456789,17,'A-169, BC Nagar, New Delhi',10000))
@@ -55,3 +69,5 @@ def sample_data():
     cur.execute(table_samplee)        
 
     mycon.commit()
+
+tables()

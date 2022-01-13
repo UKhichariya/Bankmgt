@@ -1,5 +1,5 @@
 import tables
-#tables.tables()
+tables.tables()
 #Run the above statement just once to make the necessary tables
 import random
 import pwinput as pp #install pwinput lib using "pip3 install pwinput" statement 
