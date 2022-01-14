@@ -45,8 +45,30 @@ while ch.lower() != 'exit':
         print("| Create New Account |")
         m1.ldash()
         name = str(input("Enter Name: "))
-        phone = str(input("Enter Phone: "))
-        age = str(input("Enter Age: "))
+        def input_ph(phone_no):
+            while True:
+                try:
+                    user_ph = int(input(phone_no))
+                except ValueError:
+                    print("Invalid Number, Insert a valid number")
+                else:
+                    return user_ph
+                    
+        phone = input_ph("Enter Phone: ")
+        
+
+        def input_age(age_no):
+            while True:
+                try:
+                    user_age = int(input(age_no))
+                except ValueError:
+                    print("Invalid Age, Insert a valid age")
+                else:
+                    return user_age
+                    
+        age = input_age("Enter Age: ")
+
+
         address = str(input("Enter Address: "))
         accno = random.randint(100,999)
         while accno in allacc_no: #Ensuring the accno remains unique
@@ -99,15 +121,17 @@ while ch.lower() != 'exit':
                             ch = input("Enter 1/2/3/4/5/X: ")
                             m1.ldash()
                             if ch == '1':
-                                for a in range(6):
-                                    print(fields[a],':',alldata[0][a])
+                                for a in range(5):
+                                    print(fields[a],':',alldata[0][a]) 
                                     m1.ldash()
+                                print(fields[5],':',int(alldata[0][5]))
                             if ch == '2':
-                                dep = float(input("Enter amount to deposit: "))
-                                cur.execute("update data set balance = balance+{} where accno = {};".format(dep,accno))
+                                i_dep = float(input("Enter amount to deposit: "))
+                                f_dep = i_dep+0.1 
+                                cur.execute("update data set balance = balance+{} where accno = {};".format(f_dep,accno))
                                 mycon.commit()
                                 print('.\n..\n...\n')
-                                print('Rs',dep,'added to your account successfully!')
+                                print('Rs',i_dep,'added to your account successfully!')
                                 cur.execute("select * from data where AccNo = {}".format(accno))
                                 alldata = cur.fetchall()    
                                 #Updating the deposit for the temp python list 'alldata'
@@ -124,6 +148,7 @@ while ch.lower() != 'exit':
                                 else:
                                     print('Your account has a balance of',alldata[0][5])
                                     print('You can\'nt withdraw more than what you have!')
+                            
                             if ch.lower() == 'x':
                                 break
                         
