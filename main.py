@@ -1,10 +1,11 @@
-import random
+import tables
+tables.tables()
 import pwinput as pp #install pwinput lib using "pip3 install pwinput" statement 
 import mainmenu as m1
 import mysql.connector as sqltor
-import tables
-import config
 import acc_create
+import config
+import acc_login
 
 #establishing the connection
 mycon = sqltor.connect(
@@ -20,45 +21,31 @@ if mycon.is_connected() == False:
 #Creating a sql cursor   
 cur = mycon.cursor()
 
-m1.menu()
-
-if m1.num == 1:
-    acc_create.acc_create()
-
-
-#Extracting all account numbers from the database into a list
-cur.execute("select AccNo from data")
-acc_data = cur.fetchall()
-allacc_no = []
-for a in acc_data:
-   allacc_no.append(a[0])
-#print(allacc_no)
+#Run the command below(JUST ONCE) if you do not have any sample data in your table to run the program on
+#tables.sample_data()
 
 ch = ''
-while ch.lower() != 'x':
-    if m1.num == 2:
-        accno = input("Enter account number: ")
-        if accno in allacc_no:
-            pass_input = str(pp.pwinput(prompt="Enter password: ", mask="*"))
-            m1.ldash()
-            cur.execute("select Password from pass where AccNo = {}".format(accno))
-            pass_true = cur.fetchone()
-            cur.execute("select * from data where AccNo = {}".format(accno))
-            alldata = cur.fetchall()    
-            if pass_input == pass_true[0]:
-                print("Welcome",alldata[0][1],"!")
-                print("Press (1) to View Account Details")
-                print("Press (2) to ")
-                print("Press (3) to Withdraw money")
-                print("Press (4) to Deposit money")
-                print("Press (5) to")
-            else:
-                print("Wrong password!")
-                
-        else:
-            print("Account number",accno,"does not exist!")
-            m1.menu()
-            if m1.num == 1:
-                acc_create.acc_create()
-            elif m1.num== 2:
-                print('tbd')
+
+while ch.lower() != 'exit':
+    #Extracting all account numbers from the database into a list
+    cur.execute("select AccNo from data")
+    acc_data = cur.fetchall()
+    allacc_no = []
+    for a in acc_data:
+        allacc_no.append(a[0])
+    #print(allacc_no)
+    m1.menu()
+    if m1.num == '1':
+        acc_create.acc_create()
+
+    elif m1.num == '2':
+        acc_login.acc_login()
+
+    elif m1.num.lower() == 'exit':
+        m1.leq()
+        print("Thank you for using the program!")
+        m1.leq()
+        break
+
+    else:
+        print("Please enter correct option!")

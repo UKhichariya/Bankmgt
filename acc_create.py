@@ -1,9 +1,10 @@
-import random
-import pwinput as pp #install pwinput lib using "pip3 install pwinput" statement 
 import mainmenu as m1
+import random
 import mysql.connector as sqltor
-import tables
 import config
+import pwinput as pp
+
+
 
 #establishing the connection
 mycon = sqltor.connect(
@@ -20,29 +21,48 @@ if mycon.is_connected() == False:
 cur = mycon.cursor()
 
 
-#Extracting all account numbers from the database into a list
+
+
 cur.execute("select AccNo from data")
 acc_data = cur.fetchall()
 allacc_no = []
 for a in acc_data:
-   allacc_no.append(a[0])
+    allacc_no.append(a[0])
 #print(allacc_no)
-#m1.menu()
-
 
 def acc_create():
     m1.ldash()
-    print("| Create New Account |")
+    print("|\t   Create New Account  \t       |")
     m1.ldash()
     name = str(input("Enter Name: "))
-    phone = str(input("Enter Phone: "))
-    age = str(input("Enter Age: "))
+    def input_ph(phone_no):
+        while True:
+            try:
+                user_ph = int(input(phone_no))
+            except ValueError:
+                print("Invalid Number! Please insert a valid phone number.")
+            else:
+                return user_ph
+                
+    phone = input_ph("Enter Phone: ")
+    
+
+    def input_age(age_no):
+        while True:
+            try:
+                user_age = int(input(age_no))
+            except ValueError:
+                print("Invalid Age! Please insert a valid age.")
+            else:
+                return user_age
+                
+    age = input_age("Enter Age: ")
     address = str(input("Enter Address: "))
     accno = random.randint(100,999)
     while accno in allacc_no: #Ensuring the accno remains unique
         accno = random.randint(100,999)
     if accno not in allacc_no:
-        cur.execute("insert into data values({},'{}',{},{},'{}')".format(accno,name,phone,age,address))
+        cur.execute("insert into data values({},'{}',{},{},'{}',{})".format(accno,name.title(),phone,age,address,100))
     mycon.commit()
 
     password1 = str(pp.pwinput(prompt="Create new password: ", mask="*"))
@@ -52,9 +72,13 @@ def acc_create():
             print("Passwords do not match!")
             password1 = str(pp.pwinput(prompt="Create new password: ", mask="*"))
             password2 = str(pp.pwinput(prompt="Re-enter New Password: ", mask="*"))
+    m1.ldash()
     print("Account Created Successfully!")
+    print("You will be able to manage funds after logging in.")
+    m1.leq()
     print("Your Account Number:",accno)
-    #print("Your Password:",password1)  #Note From ashish :Security flaw should not display these
     print("Remember this detail!")
+    m1.leq()
+    print('\n')
     cur.execute("insert into pass values({},'{}')".format(accno,password1))
     mycon.commit()

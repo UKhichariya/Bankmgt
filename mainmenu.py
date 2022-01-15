@@ -13,4 +13,3 @@ def menu():
     print("Enter (exit) to Exit the program")
     leq()
     num = str(input("Enter choice: "))
-
