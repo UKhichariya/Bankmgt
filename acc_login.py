@@ -52,10 +52,9 @@ def acc_login():
                         print("Press (1) to View User Details")
                         print("Press (2) to Deposit money")
                         print("Press (3) to Withdraw money")
-                        print("Press (4) to")
-                        print('PRESS (x) to return to main menu')
+                        print('Press (X) to return to main menu')
                         m1.ldash()
-                        ch = input("Enter 1/2/3/4/5/X: ")
+                        ch = input("Enter 1/2/3/X: ")
                         m1.ldash()
                         if ch == '1':
                             for a in range(5):
