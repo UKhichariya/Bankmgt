@@ -13,7 +13,7 @@ pwinput
 mysql-connector
 ````
 
-# Usage
+## Usage
 * Create a file "config.py" in the same direcotry.
 * Enter your mysql username and password to file config.py 
     ```
