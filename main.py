@@ -6,6 +6,7 @@ import mysql.connector as sqltor
 import acc_create
 import config
 import acc_login
+import time
 
 #establishing the connection
 mycon = sqltor.connect(
@@ -42,10 +43,14 @@ while ch.lower() != 'exit':
         acc_login.acc_login()
 
     elif m1.num.lower() == 'exit':
+        time.sleep(0.1)
         m1.leq()
+        time.sleep(0.1)
         print("Thank you for using the program!")
+        time.sleep(0.1)
         m1.leq()
         break
 
     else:
+        time.sleep(0.1)
         print("Please enter correct option!")

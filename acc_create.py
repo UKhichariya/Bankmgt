@@ -82,3 +82,5 @@ def acc_create():
     print('\n')
     cur.execute("insert into pass values({},'{}')".format(accno,password1))
     mycon.commit()
+    cur.execute("insert into trans values({},now(),'Deposit',100,'Account Created')".format(accno))
+    mycon.commit()
