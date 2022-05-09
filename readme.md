@@ -3,13 +3,13 @@
 
 This Proram is for managing Bank Works.
 
-Dependencies:
+### Dependencies:
 
-###General/Software Dependency:
+**General/Software Dependency:**
 * mysql-server 
 
 
-###Python Dependency: 
+**Python Dependency:** 
 
 * pwinput
 * mysql-connector
