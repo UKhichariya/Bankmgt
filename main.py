@@ -1,3 +1,5 @@
+#This is the main file of this program 
+
 import tables
 tables.tables()
 import pwinput as pp #install pwinput lib using "pip3 install pwinput" statement 
@@ -8,7 +10,7 @@ import config
 import acc_login
 import time
 
-#establishing the connection
+#establishing the connection to mysql server backend
 mycon = sqltor.connect(
     host = 'localhost',
     user = config.mysql_user,

@@ -1,3 +1,5 @@
+#File handles the tables of mysql-server required by this program 
+
 import mysql.connector as sqltor
 import config
 #establishing the connection

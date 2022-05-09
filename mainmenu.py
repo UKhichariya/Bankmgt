@@ -1,3 +1,5 @@
+#This File is the main user interface of this program ie. main menu 
+
 import time
 def ldash(n = 40):
     print('-'*n)

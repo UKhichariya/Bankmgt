@@ -1,3 +1,5 @@
+#This file handles user login in this program
+
 from asyncio import sleep
 from colorama import Fore,Style
 import mainmenu as m1
@@ -7,14 +9,14 @@ import config
 import pwinput as pp
 import time
 
-#establishing the connection
+#establishing the connection to mysql server
 mycon = sqltor.connect(
     host = 'localhost',
     user = config.mysql_user,
     passwd = config.mysql_passwd,
     database = 'bank'
 )
-#Checking if connecter or not
+#Checking if python program is able to make connection to mysql server 
 if mycon.is_connected() == False:
    print('Could not connect to database...')
 

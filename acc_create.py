@@ -1,3 +1,6 @@
+#This file handles Account creation of the user
+
+
 import mainmenu as m1
 import random
 import mysql.connector as sqltor
