@@ -7,10 +7,12 @@ This Proram is for managing Bank Works.
 
 Python Dependency: 
 
+* pwinput
+* mysql-connector
 
+Install it using the following command:
 ````
-pwinput
-mysql-connector
+pip3 install pwinput mysql-connector
 ````
 
 ## Usage
@@ -23,6 +25,6 @@ mysql-connector
     ```
 
 * (optional) Add filename "config.py" to
-.gitignore to avoid pushing it to remote repo.
+.gitignore to avoid pushing your credentials file to remote repo.
 
 
